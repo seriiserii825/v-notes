@@ -1,89 +1,60 @@
 <template>
-  <div class="wrapper">
-    <div class="wrapper-content">
-      <section>
-        <div class="container">
-          <div id="app">
-            <h1>{{ title }}</h1>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
-            <div class="message" v-if="message">
-              <p>{{ message }}</p>
-            </div>
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
 
-            <div class="new-note">
-              <input type="text" v-model="note.title">
-              <textarea v-model="note.description"></textarea>
-              <button @click="addNote">Add note</button>
-            </div>
+      <v-spacer></v-spacer>
 
-            <div class="notes">
-              <div class="note" v-for="(note, index) in notes" :key="index">
-                <div class="note-header">{{ note.title }}</div>
-                <div class="note-body">
-                  <p>{{ note.description }}</p>
-                  <span>{{ note.date }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <HelloWorld/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
+import HelloWorld from './components/HelloWorld'
 
 export default {
-  data () {
-    return {
-      title: 'Note App',
-      message: null,
-      note: {
-        title: '',
-        description: ''
-      },
-      notes: [
-        {
-          title: 'First Note',
-          description: 'Description for First Note',
-          date: new Date(Date.now()).toLocaleString()
-        },
-        {
-          title: 'Second Note',
-          description: 'Description for Second Note',
-          date: new Date(Date.now()).toLocaleString()
-        },
-        {
-          title: 'Third Note',
-          description: 'Description for Third Note',
-          date: new Date(Date.now()).toLocaleString()
-        }
-      ]
-    }
+  name: 'App',
+
+  components: {
+    HelloWorld
   },
-  methods: {
-    addNote () {
-      const { title, description } = this.note
 
-      if (title === '') {
-        this.message = 'Title can\'t be blank'
-        return false
-      }
-
-      this.notes.push({
-        title,
-        description,
-        date: new Date(Date.now()).toLocaleString()
-      })
-      this.message = null
-      this.note.title = ''
-      this.note.description = ''
-    }
-  }
+  data: () => ({
+    //
+  })
 }
 </script>
-
-<style lang="scss">
-
-</style>
